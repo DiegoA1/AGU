@@ -89,13 +89,11 @@ public class VentanaLogin extends JFrame {
     private void entrarLogin() {
         String Usuario = "admin";
         String Contraseña = "admin";
-
         String Pass = new String(campoContrasena.getPassword());
 
         if (campoUsuario.getText().equalsIgnoreCase(Usuario) && Pass.equals(Contraseña)) {
             dispose();
             VentanaPrincipal p = new VentanaPrincipal();
-
         } else {
             JOptionPane.showMessageDialog(this, "Usuario y/o Contraseña incorrecta");
         }

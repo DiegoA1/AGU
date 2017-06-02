@@ -5,6 +5,9 @@ import java.awt.Font;
 import javax.swing.JFrame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -36,8 +39,10 @@ public class VentanaAgregarGasto extends JFrame {
     private JButton btnAgregar;
     private JButton btnCancelar;
 
-    public VentanaAgregarGasto() {
+    private VentanaPrincipal p;
 
+    public VentanaAgregarGasto(VentanaPrincipal p) {
+        this.p = p;
         initComponents();
 
     }
@@ -137,16 +142,22 @@ public class VentanaAgregarGasto extends JFrame {
 
             String a = campoGastoA.getText();
             String b = campoDescripcionA.getText();
-            String c = categoria.getItemAt(WIDTH);
-            String d = mes.getItemAt(WIDTH);
-            String f = ano.getItemAt(WIDTH);
-            Gasto g = new Gasto(a, b, c, d, f);         
+            String c = categoria.getSelectedItem().toString();
+            String d = mes.getSelectedItem().toString();
+            String f = ano.getSelectedItem().toString();
+            Gasto g = new Gasto(a, b, c, d, f);
             lista.add(g);
-            agregarLista();
-            
+
+            for (int i = 0; i < lista.size(); i++) {
+                p.agregarGastosNuevos(lista.get(i)); 
+                
+            }
+                           
+
             dispose();
-            VentanaPrincipal p = new VentanaPrincipal();
-            
+            //VentanaPrincipal p = new VentanaPrincipal();
+            p.setVisible(true);
+            p.setTabla(p.agregarLista());
         } else {
             JOptionPane.showMessageDialog(null, "En [Gastos] ingrese numero enteros");
         }
@@ -169,20 +180,5 @@ public class VentanaAgregarGasto extends JFrame {
         }
         return v;
     }
-    
-    public void agregarLista() {
-        String MatrizAgregar[][] = new String[lista.size()][5];
-        for (int i = 0; i < lista.size(); i++) {
-            
-            MatrizAgregar[i][0] = lista.get(i).getgGasto();
-            MatrizAgregar[i][1] = lista.get(i).getgDescripcion();
-            MatrizAgregar[i][2] = lista.get(i).getgCategoria();
-            MatrizAgregar[i][3] = lista.get(i).getgMes();
-            MatrizAgregar[i][4] = lista.get(i).getgAno();
-        }
-      
-    }
-    
 
-    
 }

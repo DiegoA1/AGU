@@ -112,7 +112,7 @@ public class VentanaPerfil extends JFrame {
         this.btnVolver.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                volverv();
+                volverVentanaPrincipal();
             }
         });
         this.btnVolver.setBounds(140, 188, 89, 23);
@@ -122,7 +122,7 @@ public class VentanaPerfil extends JFrame {
         this.btnEditar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                editarPerfil();
             }
         });
         this.btnEditar.setBounds(340, 188, 89, 23);
@@ -134,9 +134,14 @@ public class VentanaPerfil extends JFrame {
 
     }
 
-    public void volverv() {
+    public void volverVentanaPrincipal() {
         dispose();
         VentanaPrincipal vp = new VentanaPrincipal();
+    }
+
+    public void editarPerfil() {
+        dispose();
+        VentanaEditar ve = new VentanaEditar();
     }
 
 }

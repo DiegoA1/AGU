@@ -115,7 +115,7 @@ public class VentanaEditar extends JFrame {
         this.btnCambiarE.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                guardarPerfil();
             }
         });
         this.btnCambiarE.setBounds(180, 200, 89, 23);
@@ -130,5 +130,9 @@ public class VentanaEditar extends JFrame {
     public void volverPerfil() {
         dispose();
         VentanaPerfil vper = new VentanaPerfil();
+    }
+
+    public void guardarPerfil() {
+
     }
 }

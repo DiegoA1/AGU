@@ -1,9 +1,14 @@
 package view;
 
+import data.Gasto;
 import java.awt.Font;
 import javax.swing.JFrame;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -39,6 +44,10 @@ public class VentanaPrincipal extends JFrame {
 
     private JScrollPane tablaContenedora;
     private JTable tabla;
+
+    private VentanaLogin l;
+
+    private ArrayList<Gasto> lista = new ArrayList<Gasto>();
 
     public VentanaPrincipal() {
 
@@ -146,7 +155,7 @@ public class VentanaPrincipal extends JFrame {
                         + "\n"
                         + "Cristobal Carrion, Correo c.carrion01@ufromail.cl, Pais Chile\n"
                         + "Diego Agüero, Correo d.aguero02@ufromail.cl, Pais Chile");
-                       
+
             }
         });
 
@@ -184,7 +193,37 @@ public class VentanaPrincipal extends JFrame {
 
     }
 
-    ///ACCIONES DE LOS BOTONES
+    public void setTabla(String[][] tablaGastos) {
+        
+        this.tabla.setModel(new DefaultTableModel(
+                tablaGastos,
+                new String[]{
+                    "Gasto", "Descripcion", "Categoria", "Mes", "Año"
+                }
+        ));
+        this.tabla.setEnabled(false);
+        this.tablaContenedora.setViewportView(this.tabla);
+        this.tablaContenedora.setBounds(100, 220, 510, 400);
+        this.panelVentanaPrincipal.add(this.tablaContenedora);    
+    }
+
+    public String[][] agregarLista() {
+        String MatrizAgregar[][] = new String[lista.size()][5];
+        for (int i = 0; i < lista.size(); i++) {
+
+            MatrizAgregar[i][0] = lista.get(i).getgGasto();
+            MatrizAgregar[i][1] = lista.get(i).getgDescripcion();
+            MatrizAgregar[i][2] = lista.get(i).getgCategoria();
+            MatrizAgregar[i][3] = lista.get(i).getgMes();
+            MatrizAgregar[i][4] = lista.get(i).getgAno();
+        }
+        return MatrizAgregar;
+    }
+
+    public void agregarGastosNuevos(Gasto gasto) {
+        lista.add(gasto);
+    }
+
     private void agregarSaldoB() {
         if (validadorDigitos(campoSaldoActual.getText()) && validadorDigitos(campoAgregarSaldo.getText())) {
             int a = Integer.parseInt(String.valueOf(campoSaldoActual.getText()));
@@ -205,6 +244,7 @@ public class VentanaPrincipal extends JFrame {
             if (c >= 0) {
                 campoSaldoActual.setText(String.valueOf(c));
             } else {
+    
                 JOptionPane.showMessageDialog(null, "El saldo NO puede ser negativo");
             }
 
@@ -215,20 +255,17 @@ public class VentanaPrincipal extends JFrame {
 
     private void agregarGastoB() {
         dispose();
-        VentanaAgregarGasto ag = new VentanaAgregarGasto();
-    }
-
-    private void graficoB() {
-
-    }
-
-    private void borrarLineaB() {
-
+        VentanaAgregarGasto ag = new VentanaAgregarGasto(this);
     }
 
     private void cerrarSesionB() {
         dispose();
         VentanaLogin l = new VentanaLogin();
+
+    }
+
+    private void borrarLineaB() {
+
     }
 
     public static boolean validadorDigitos(String cadena) {
@@ -242,9 +279,14 @@ public class VentanaPrincipal extends JFrame {
         }
         return v;
     }
-    public void irPerfil(){
+
+    public void irPerfil() {
         dispose();
         VentanaPerfil vpp = new VentanaPerfil();
     }
-    
+
+    private void graficoB() {
+
+    }
+
 }

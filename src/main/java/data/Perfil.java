@@ -1,19 +1,25 @@
 package data;
 
+import java.util.Objects;
+
 public class Perfil {
 
     private String pUsuario;
-    private String pEdas;
+    private String pEdad;
     private String pOcupacion;
     private String pCiudad;
     private String pCorreo;
 
-    public Perfil(String pUsuario, String pEdas, String pOcupacion, String pCiudad, String pCorreo) {
-        this.pUsuario = pUsuario;
-        this.pEdas = pEdas;
-        this.pOcupacion = pOcupacion;
-        this.pCiudad = pCiudad;
-        this.pCorreo = pCorreo;
+    public Perfil(String pUsuario, String pEdad, String pOcupacion, String pCiudad, String pCorreo) throws IllegalArgumentException{
+        if (pUsuario != null && pEdad != null && pOcupacion != null && pCiudad != null && pCorreo != null) {
+            this.pUsuario = pUsuario;
+            this.pEdad = pEdad;
+            this.pOcupacion = pOcupacion;
+            this.pCiudad = pCiudad;
+            this.pCorreo = pCorreo;
+         }else{
+            throw new IllegalArgumentException("Parametros nulos");
+        }
     }
 
     public String getpUsuario() {
@@ -24,12 +30,12 @@ public class Perfil {
         this.pUsuario = pUsuario;
     }
 
-    public String getpEdas() {
-        return pEdas;
+    public String getpEdad() {
+        return pEdad;
     }
 
-    public void setpEdas(String pEdas) {
-        this.pEdas = pEdas;
+    public void setpEdad(String pEdad) {
+        this.pEdad = pEdad;
     }
 
     public String getpOcupacion() {
@@ -55,5 +61,16 @@ public class Perfil {
     public void setpCorreo(String pCorreo) {
         this.pCorreo = pCorreo;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        Perfil p = (Perfil)obj;
+        if (this.pUsuario == p.pUsuario && this.pEdad == p.pEdad && this.pOcupacion == p.pOcupacion && this.pCiudad == p.pCiudad && this.pCorreo == p.pCorreo) {
+            return true;
+        }
+        return true;
+    }
+    
+    
 
 }

@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Objects;
+
 public class Gasto {
 
     private String gGasto;
@@ -8,12 +10,17 @@ public class Gasto {
     private String gMes;
     private String gAno;
 
-    public Gasto(String gGasto, String gDescripcion, String gCategoria, String gMes, String gAno) {
-        this.gGasto = gGasto;
-        this.gDescripcion = gDescripcion;
-        this.gCategoria = gCategoria;
-        this.gMes = gMes;
-        this.gAno = gAno;
+    public Gasto(String gGasto, String gDescripcion, String gCategoria, String gMes, String gAno) throws IllegalArgumentException{
+        if (gGasto != null && gDescripcion != null && gCategoria != null && gMes != null && gAno != null) {
+            this.gGasto = gGasto;
+            this.gDescripcion = gDescripcion;
+            this.gCategoria = gCategoria;
+            this.gMes = gMes;
+            this.gAno = gAno;
+        }else{
+            throw new IllegalArgumentException("Parametros nulos");
+        }
+        
     }
 
     public String getgGasto() {
@@ -55,5 +62,16 @@ public class Gasto {
     public void setgAno(String gAno) {
         this.gAno = gAno;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Gasto g = (Gasto)obj;
+        if (this.gGasto == g.gGasto && this.gDescripcion == g.gDescripcion && this.gCategoria == g.gCategoria && this.gMes == g.gMes && this.gAno == g.gAno) {
+            return true;
+        }
+        return true;
+    }
+    
+    
 
 }
